@@ -3,8 +3,14 @@ const bodyParser    = require('body-parser');
 const path          = require('path');
 const fs            = require('fs');
 const http          = require('http');
+const exec          = require('child_process').exec;  
 const app           = express();
 const PORT          = 4000;
+
+fs.watchFile("./testModule.js",function(){
+    exec('sh jsDocParse.sh');
+})
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/',express.static(__dirname));
